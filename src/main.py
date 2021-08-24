@@ -27,7 +27,7 @@ def solve_subroutine(starting_problem: Problem, upper_bound: Optional[int]):
     else:
         upper_bound += len(starting_problem.starts)
     solver = Solver(starting_problem, algorithm)
-    solution, tracker = solver.solve(upper_bound=upper_bound)
+    solution, tracker = solver.solve(upper_bound=upper_bound + 1)
     if solution is None:
         print("Failed to find solution")
         return None
@@ -56,8 +56,6 @@ def run_online_benchmarker():
     version = '1.0.1'
     debug = False
     api_token = open('../apitoken.txt', 'r').read().strip()
-    algorithm_descriptor = AlgorithmDescriptor(Algorithm.HeuristicMatching,
-                                               independence_detection=True)
     benchmarker = MapfBenchmarker(api_token, BenchmarkDescriptor(93), "EPEA* with branch-and-bound",
                                   get_version(debug, version), debug,
                                   solver=solve_branch_and_bound,

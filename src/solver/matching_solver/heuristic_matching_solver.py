@@ -46,8 +46,6 @@ class HeuristicMatchingSolver:
         Solves the problem with which the solver instance was instantiated
         :return:    Solution if it was found
         """
-
-        # Don't look at me
         self.solver.max_cost = upper_bound
         self.solver.max_value = upper_bound
         sol = self.solver.solve()
