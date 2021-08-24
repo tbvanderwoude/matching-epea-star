@@ -41,9 +41,16 @@ class HeuristicMatchingSolver:
         else:
             self.solver = EPEAStar(mapf_problem, agents, [], self.stat_tracker)
 
-    def solve(self) -> Tuple[Optional[List[Path]], StatisticTracker]:
+    def solve(self,upper_bound: Optional[int] = None) -> Tuple[Optional[List[Path]], StatisticTracker]:
         """
         Solves the problem with which the solver instance was instantiated
         :return:    Solution if it was found
         """
-        return self.solver.solve()[0], self.stat_tracker
+
+        # Don't look at me
+        self.solver.max_cost = upper_bound
+        self.solver.max_value = upper_bound
+        sol = self.solver.solve()
+        if sol:
+            sol = sol[0]
+        return sol, self.stat_tracker

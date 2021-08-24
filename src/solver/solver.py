@@ -41,9 +41,9 @@ class Solver:
         elif algorithm.algorithm is Algorithm.HeuristicMatching:
             self.solver = HeuristicMatchingSolver(problem, independence_detection=algorithm.id)
 
-    def solve(self) -> Tuple[Optional[List[Path]], StatisticTracker]:
+    def solve(self,upper_bound: Optional[int] = None) -> Tuple[Optional[List[Path]], StatisticTracker]:
         """
         Runs the algorithm to solve the MAPFM problem
         :return:    A path for every agent
         """
-        return self.solver.solve()
+        return self.solver.solve(upper_bound=upper_bound)
